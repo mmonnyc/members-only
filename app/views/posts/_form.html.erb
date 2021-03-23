@@ -1,22 +1,15 @@
-<%= form_with(model: post) do |form| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :post %>
-    <%= form.text_area :post %>
+<%= simple_form_for(@post) do |f| %>
+<%= f.error_notification %>
+<div class="field">
+  <label class="label">Post about it</label>
+  <div class="control">
+    <%= f.input :title, input_html: { class: "input"}, label_html: {class: "label is-hidden"}, 
+    placeholder: "What's it about?", wrapper: false, autofocus: true%>
+  </div><br \>
+  <div class="control">
+    <%= f.input :post, input_html: { class: "textarea"}, label_html: {class: "label is-hidden"}, 
+    placeholder: "Compose your post", wrapper: false %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+</div>
+<%= f.button :submit, class: "button is-primary" %>
 <% end %>
